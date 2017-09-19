@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -9,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LandingPageComponent implements OnInit {
   emailInput: string;
-  slackUrl: string = "https://hooks.slack.com/services/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"
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class LandingPageComponent implements OnInit {
     const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!",});
     this.http.request(
       "POST",
-      this.slackUrl,
+      environment.slackWebHookUrl,
       {
         "body": payload,
       }
