@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -13,6 +12,7 @@ export class LandingPageComponent implements OnInit {
   emailValid: boolean = false;
   captchaSiteKey: string = environment.captchaSiteKey;
   captchaResponse: string;
+  message: string;
 
   constructor(private http: HttpClient) { }
 
@@ -21,8 +21,7 @@ export class LandingPageComponent implements OnInit {
 
   submitEmail(email: string) {
     this.validateEmail(email);
-    if (this.emailValid) {
-      grecaptcha.reset();
+    if (this.emailValid && this.captchaResponse !== undefined) {
       const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!",});
       this.http.request(
         "POST",
@@ -31,7 +30,16 @@ export class LandingPageComponent implements OnInit {
           "body": payload,
         }
       ).subscribe();
+      this.message = "Thank You! You will get a slack invitation in the next 24 hours.";
+    } else if (!this.emailValid && this.captchaResponse === undefined) {
+      this.message = "Unfortunately, you will need to fill in both the email and the captcha.";
+    } else if (!this.emailValid && this.captchaResponse !== undefined) {
+      this.message = "Please enter a valid email.";
+    } else {
+      this.message = "Please verify that you are not a bot by checking the captcha box.";
     }
+    grecaptcha.reset();
+    this.captchaResponse = undefined;
   }
 
   validateEmail(email: string) {
