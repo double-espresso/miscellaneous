@@ -11,6 +11,8 @@ import { environment } from '../../environments/environment';
 export class LandingPageComponent implements OnInit {
   emailInput: string;
   emailValid: boolean = false;
+  captchaSiteKey: string = environment.captchaSiteKey;
+  captchaResponse: string;
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +22,7 @@ export class LandingPageComponent implements OnInit {
   submitEmail(email: string) {
     this.validateEmail(email);
     if (this.emailValid) {
+      grecaptcha.reset();
       const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!",});
       this.http.request(
         "POST",
@@ -34,6 +37,10 @@ export class LandingPageComponent implements OnInit {
   validateEmail(email: string) {
     const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     (pattern.exec(email) !== null)? this.emailValid = true: this.emailValid = false;
+  }
+
+  resolved(captchaResponse: string) {
+    this.captchaResponse = captchaResponse;
   }
 
 }

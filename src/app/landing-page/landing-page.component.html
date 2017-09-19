@@ -1,5 +1,11 @@
 
-<div>
-  <input type="email" [(ngModel)]="emailInput">
-  <button (click)="submitEmail(emailInput)">submit email</button>
-</div>
+<form>
+  <input
+         type="email"
+         [(ngModel)]="emailInput"
+         name="email">
+  <re-captcha (resolved)="resolved($event)"
+              siteKey={{captchaSiteKey}}>
+  </re-captcha>
+  <button  (click)="submitEmail(emailInput)">submit email</button>
+</form>
