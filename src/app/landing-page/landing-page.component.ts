@@ -10,23 +10,30 @@ import { environment } from '../../environments/environment';
 })
 export class LandingPageComponent implements OnInit {
   emailInput: string;
+  emailValid: boolean = false;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
-  submitEmail(email) {
-    const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!",});
-    this.http.request(
-      "POST",
-      environment.slackWebHookUrl,
-      {
-        "body": payload,
-      }
-  ).subscribe();
+  submitEmail(email: string) {
+    this.validateEmail(email);
+    if (this.emailValid) {
+      const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!",});
+      this.http.request(
+        "POST",
+        environment.slackWebHookUrl,
+        {
+          "body": payload,
+        }
+      ).subscribe();
+    }
+  }
+
+  validateEmail(email: string) {
+    const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    (pattern.exec(email) !== null)? this.emailValid = true: this.emailValid = false;
   }
 
 }
-
-// curl -X POST --data-urlencode 'payload={"username": "webhookbot", "text": "This is posted to #general and comes from a bot named webhookbot.", "icon_emoji": ":ghost:"}' https://hooks.slack.com/services/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
