@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-landing-page',
@@ -22,12 +23,15 @@ export class LandingPageComponent implements OnInit {
   submitEmail(email: string) {
     this.validateEmail(email);
     if (this.emailValid && this.captchaResponse !== undefined) {
-      const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!",});
+      const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!"});
+      const headers = new HttpHeaders().append("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
       this.http.request(
         "POST",
         environment.slackWebHookUrl,
         {
           "body": payload,
+          "headers": headers,
+          "responseType": "text"
         }
       ).subscribe();
       this.message = "Thank You! You will get a slack invitation in the next 24 hours.";
