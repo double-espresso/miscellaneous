@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent implements OnInit {
-  emailInput: string;
+export class LandingPageComponent {
   emailValid: boolean = null;
   captchaSiteKey: string = environment.captchaSiteKey;
   captchaResponse: string = null;
   unsuccessfulMessage: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
-
-  ngOnInit() {
-  }
+  constructor(private http: HttpClient,
+              private router: Router,
+              translate: TranslateService) {
+                translate.setDefaultLang('en');
+                translate.use('en');
+              }
 
   submitEmail(email: string) {
     this.validateEmail(email);

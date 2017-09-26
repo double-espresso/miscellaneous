@@ -9,7 +9,7 @@
 <form class="email-form">
   <input class="email-input"
          type="email"
-         [(ngModel)]="emailInput"
+         #emailInput
          name="email"
          placeholder="you@example.com">
   <re-captcha class="g-recaptcha"
@@ -17,7 +17,7 @@
               siteKey={{captchaSiteKey}}>
   </re-captcha>
   <button class="email-submit-button btn-lg"
-          (click)="submitEmail(emailInput)">
+          (click)="submitEmail(emailInput.value)">
           <strong>REQUEST</strong>
   </button>
 </form>
