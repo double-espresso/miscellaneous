@@ -5,4 +5,6 @@
 
 export const environment = {
   production: false,
+  slackWebHookUrl: "https://hooks.slack.com/services/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",
+  captchaSiteKey: "6LdSNzEUAAAAAMNxNVgMKOZpQeb_nhlH60zgC5td"
 };
