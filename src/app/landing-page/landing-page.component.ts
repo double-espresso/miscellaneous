@@ -26,7 +26,7 @@ export class LandingPageComponent {
     this.validateEmail(email);
     if (this.emailValid && this.captchaResponse !== null) {
       this.router.navigateByUrl('/success');
-      const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!"});
+      const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!", "channel": "submissions"});
       const headers = new HttpHeaders().append("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
       this.http.request(
         "POST",
