@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,11 +15,7 @@ export class LandingPageComponent {
   unsuccessfulMessage: string;
 
   constructor(private http: HttpClient,
-              private router: Router,
-              translate: TranslateService) {
-                translate.setDefaultLang('en');
-                translate.use('en');
-              }
+              private router: Router) {}
 
   submitEmail(email: string) {
     this.validateEmail(email);
