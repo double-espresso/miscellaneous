@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import 'rxjs/add/operator/toPromise';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,19 +10,20 @@ import 'rxjs/add/operator/toPromise';
 })
 export class LandingPageComponent implements OnInit {
   emailInput: string;
-  emailValid: boolean = false;
+  emailValid: boolean = null;
   captchaSiteKey: string = environment.captchaSiteKey;
-  captchaResponse: string;
-  message: string;
+  captchaResponse: string = null;
+  unsuccessfulMessage: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }
 
   submitEmail(email: string) {
     this.validateEmail(email);
-    if (this.emailValid && this.captchaResponse !== undefined) {
+    if (this.emailValid && this.captchaResponse !== null) {
+      this.router.navigateByUrl('/success');
       const payload = JSON.stringify({"text": email + " wants to join the Swiftfest Slack Channel!"});
       const headers = new HttpHeaders().append("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
       this.http.request(
@@ -34,16 +35,14 @@ export class LandingPageComponent implements OnInit {
           "responseType": "text"
         }
       ).subscribe();
-      this.message = "Thank You! You will get a slack invitation in the next 24 hours.";
-    } else if (!this.emailValid && this.captchaResponse === undefined) {
-      this.message = "Unfortunately, you will need to fill in both the email and the captcha.";
-    } else if (!this.emailValid && this.captchaResponse !== undefined) {
-      this.message = "Please enter a valid email.";
-    } else {
-      this.message = "Please verify that you are not a bot by checking the captcha box.";
+      this.unsuccessfulMessage = null;
+    } else if (this.emailValid===false) {
+      this.unsuccessfulMessage = "Email address is invalid, Please try again";
+    } else if (this.captchaResponse===null){
+      this.unsuccessfulMessage = "Please verify that you are not a bot by checking the captcha box.";
     }
     grecaptcha.reset();
-    this.captchaResponse = undefined;
+    this.captchaResponse = null;
   }
 
   validateEmail(email: string) {

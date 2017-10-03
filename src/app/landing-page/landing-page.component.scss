@@ -1,0 +1,22 @@
+.header-message {
+  font-size: 40px;
+}
+
+.email-submit-unsuccessful {
+  color: red;
+}
+
+.email-form {
+  margin: auto;
+  display: table;
+}
+
+.email-input, .email-submit-button {
+  width: 100%;
+}
+
+.email-submit-button {
+  border: 3px solid orangered;
+  background-color: white;
+  color: orangered;
+}

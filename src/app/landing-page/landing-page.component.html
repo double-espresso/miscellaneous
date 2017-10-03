@@ -1,11 +1,23 @@
-{{message}}
-<form>
-  <input
+<p class="header-message">Request to join the
+  <br>
+  <strong>Swiftfest</strong> slack channel
+</p>
+<br>
+<p *ngIf="(emailValid===null)" class="email-message">Enter your <strong>email address</strong></p>
+<p *ngIf="(emailValid===false || captchaResponse===null)"
+   class="email-submit-unsuccessful">{{unsuccessfulMessage}}</p>
+<form class="email-form">
+  <input class="email-input"
          type="email"
          [(ngModel)]="emailInput"
-         name="email">
-  <re-captcha (resolved)="resolved($event)"
+         name="email"
+         placeholder="you@example.com">
+  <re-captcha class="g-recaptcha"
+              (resolved)="resolved($event)"
               siteKey={{captchaSiteKey}}>
   </re-captcha>
-  <button  (click)="submitEmail(emailInput)">submit email</button>
+  <button class="email-submit-button btn-lg"
+          (click)="submitEmail(emailInput)">
+          <strong>REQUEST</strong>
+  </button>
 </form>

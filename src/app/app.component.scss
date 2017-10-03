@@ -1,0 +1,18 @@
+.outside-container, .inside-container {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: monospace;
+  text-align: center;
+}
+
+.outside-container {
+  background-image: url("../assets/images/background.jpg");
+  padding: 80px;
+}
+
+.inside-container {
+  background-color: white;
+  padding: 60px;
+}
