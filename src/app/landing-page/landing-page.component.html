@@ -3,9 +3,7 @@
   <strong>Swiftfest</strong> slack channel
 </p>
 <br>
-<p *ngIf="(emailValid===null)" class="email-message">Enter your <strong>email address</strong></p>
-<p *ngIf="(emailValid===false || captchaResponse===null)"
-   class="email-submit-unsuccessful">{{unsuccessfulMessage}}</p>
+<div [innerHTML]="messageToUser"></div>
 <form class="email-form">
   <input class="email-input"
          type="email"
@@ -16,6 +14,7 @@
               (resolved)="resolved($event)"
               siteKey={{captchaSiteKey}}>
   </re-captcha>
+  <br>
   <button class="email-submit-button btn-lg"
           (click)="submitEmail(emailInput.value)">
           <strong>REQUEST</strong>
