@@ -2,7 +2,7 @@
   font-size: 40px;
 }
 
-.email-submit-unsuccessful {
+:host ::ng-deep .email-submit-unsuccessful {
   color: red;
 }
 
