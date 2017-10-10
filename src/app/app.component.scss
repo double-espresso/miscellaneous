@@ -4,14 +4,16 @@
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Space Mono', monospace;
-  text-align: center;
 }
 
 .outside-container {
-  background-image: url("../assets/images/background.jpg");
-  padding: 80px 40px 80px 40px;
+  background-image: url("../assets/images/background.png");
+  padding-top: 7%;
+  padding-bottom: 7%;
 }
 
 .inside-container {
+  width: 80%;
+  margin: 0 auto;
   background-color: white;
 }

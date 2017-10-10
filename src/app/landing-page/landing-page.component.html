@@ -1,22 +1,26 @@
-<p class="header-message">Request to join the
+<div class="message-container">
+  <p class="title-message header-message" [innerHTML]="'titleMessage' | translate"></p>
   <br>
-  <strong>Swiftfest</strong> slack channel
-</p>
-<br>
-<div [innerHTML]="messageToUser"></div>
-<form class="email-form">
-  <input class="email-input"
-         type="email"
-         #emailInput
-         name="email"
-         placeholder="you@example.com">
-  <re-captcha class="g-recaptcha"
+  <div class="line"></div>
+  <br>
+  <div [innerHTML]="messageToUser"></div>
+  <form>
+    <input class="email-input"
+           type="email"
+           #emailInput
+           name="email"
+           placeholder="you@example.com">
+    <br><br>
+
+    <re-captcha class="g-recaptcha"
               (resolved)="resolved($event)"
               siteKey={{captchaSiteKey}}>
-  </re-captcha>
-  <br>
-  <button class="email-submit-button btn-lg"
-          (click)="submitEmail(emailInput.value)">
-          <strong>REQUEST</strong>
-  </button>
-</form>
+    </re-captcha>
+
+    <br>
+    <button class="email-submit-button btn-lg"
+            (click)="submitEmail(emailInput.value)">
+            <strong>REQUEST</strong>
+    </button>
+  </form>
+</div>

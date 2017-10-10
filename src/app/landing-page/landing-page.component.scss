@@ -1,3 +1,8 @@
+.message-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
 .header-message {
   font-size: 40px;
 }
@@ -6,22 +11,32 @@
   color: red;
 }
 
-.email-form {
-  margin: auto;
-  display: table;
-}
-
 .email-input, .email-submit-button {
   width: 100%;
 }
 
+.email-input {
+  height: 3em;
+}
+
 .email-submit-button {
   border: 3px solid orangered;
+  border-radius: 5px;
   background-color: white;
   color: orangered;
+  font-size: 30px;
+  letter-spacing: 0.1em;
 }
 
 .email-submit-button:hover {
   background-color: orangered;
   color: white;
+}
+
+.line{
+width: 50%;
+height: 10px;
+border: 1px solid orangered;
+border-radius: 10px;
+background: orangered;
 }
