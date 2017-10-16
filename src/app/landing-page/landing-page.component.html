@@ -3,15 +3,15 @@
   <br>
   <div class="line"></div>
   <br>
-  <div [innerHTML]="messageToUser"></div>
+  <div [innerHTML]="messageToUser" class="message-to-user"></div>
   <form>
     <input class="email-input"
            type="email"
            #emailInput
            name="email"
            placeholder="you@example.com">
-    <br><br>
-
+    <br>
+    <br>
     <re-captcha class="g-recaptcha"
               (resolved)="resolved($event)"
               siteKey={{captchaSiteKey}}>

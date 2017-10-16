@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 body, html {
-    height: 100%;
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(237deg, #FF422A 37%, #FBAC3F 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }

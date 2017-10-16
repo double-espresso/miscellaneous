@@ -1,6 +1,5 @@
 .message-container {
-  width: 60%;
-  margin: 0 auto;
+  height:100%;
 }
 
 .header-message {
@@ -15,8 +14,15 @@
   width: 100%;
 }
 
+input {
+  box-sizing:border-box;
+  padding-left: 10px;
+}
+
 .email-input {
-  height: 3em;
+  height: 3.4em;
+  font-size: 22px;
+  border-radius: 1px;
 }
 
 .email-submit-button {
@@ -26,6 +32,7 @@
   color: orangered;
   font-size: 30px;
   letter-spacing: 0.1em;
+  box-sizing: border-box;
 }
 
 .email-submit-button:hover {
@@ -34,9 +41,47 @@
 }
 
 .line{
-width: 50%;
-height: 10px;
-border: 1px solid orangered;
-border-radius: 10px;
-background: orangered;
+  width: 100px;
+  height: 5px;
+  border: 1px solid orangered;
+  background: orangered;
+}
+
+@media (max-width: 500px) {
+  .header-message {
+    font-size: 23px;
+  }
+  .email-input {
+    font-size: 17px;
+    border-radius: 1px;
+  }
+  :host /deep/ p {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-message {
+    font-size: 33px;
+  }
+  .email-input {
+    font-size: 20px;
+    border-radius: 1px;
+  }
+  :host /deep/ p {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 701px) and (max-width:903px) {
+  .header-message {
+    font-size: 35px;
+  }
+  .email-input {
+    font-size: 21.5px;
+    border-radius: 1px;
+  }
+  :host /deep/ p {
+    font-size: 21.5px;
+  }
 }
